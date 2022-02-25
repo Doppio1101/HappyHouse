@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Implementation-Title: HappyHouse_Final_Backend_Gwangju_05_JangJungHun_
+ HwangSeonJu
+Implementation-Version: 2021.11.19 start
+Build-Jdk-Spec: 1.8
+Created-By: Maven Integration for Eclipse
+

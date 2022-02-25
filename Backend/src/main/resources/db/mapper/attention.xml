@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.dao.attentionDao">
+	
+	<insert id="insertAttention" parameterType="attentionDto">
+	<if test="address!='' and address!=null">
+		insert into attention(userid, sigungucode, postnum, address, detailaddress, nickname, lat, lng)
+		values (#{userid}, #{sigungucode}, #{postnum}, #{address}, #{detailaddress}, #{nickname}, #{lat}, #{lng})
+	</if>
+	</insert>
+	
+	<select id="detailAttention" parameterType="string" resultType="attentionDto">
+		select no, userid, bname, sigungucode, postnum, address, detailaddress, lat, lng, nickname, concat(address, ' (', detailaddress, ')') as totaladdress
+		from attention
+		where userid=#{userid}
+		order by no;
+	</select>
+	
+	<update id="updateAttention" parameterType="attentionDto">
+		update attention
+		set bname=#{bname}, sigungucode=#{sigungucode}, postnum=#{postnum}, address=#{address}, detailaddress=#{detailaddress}, nickname=#{nickname}
+		where no=#{no}
+	</update>
+	
+	<delete id="deleteAttention" parameterType="string">
+		delete from attention
+		where userid=#{userid}
+	</delete>
+</mapper>

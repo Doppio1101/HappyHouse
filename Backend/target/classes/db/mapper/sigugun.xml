@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.dao.sigugunDao">
+
+	<select id="getSidoList" resultType="sidoDto">
+		select * from sidocode order by sidoCode;
+	</select>
+	
+	<select id="getGugunList" parameterType="string" resultType="gugunDto">
+		select * from guguncode where guguncode like concat(#{sidoCode},'%') order by gugunName;
+	</select>
+	
+	<select id="getDongList" parameterType="string" resultType="dongDto">
+		select * from dongcode where dongcode like concat(#{gugunCode},'%') order by dongName;
+	</select>
+	
+	<select id="checkItem" parameterType="string" resultType="int">
+		select count(*) from dongcode where dongcode = #{code}
+	</select>
+	
+	<insert id="updateData" parameterType="dongDto">
+		insert into dongcode(dongcode, dongname, gugunname, sidoname) values(#{gugunCode}, #{gugunName}, #{gugunName}, #{sidoName})
+	</insert>
+
+</mapper>

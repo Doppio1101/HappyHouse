@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.dao.memberDao">
+	
+	<select id="idChk" parameterType="string" resultType="int">
+		select count(userid)
+		from member
+		where userid = #{userid}
+	</select>
+	
+	<insert id="insertMember" parameterType="memberDto">
+		insert into member
+		values (#{userid}, #{userpw}, #{username}, #{email})
+	</insert>
+	
+	<update id="updateMember" parameterType="memberDto">
+		update member set userpw = #{userpw}, username = #{username}, email = #{email} 
+		where userid = #{userid}
+	</update>
+	
+	<delete id="deleteMember" parameterType="string">
+		delete from member 
+		where userid=#{userid}
+	</delete>
+	
+	<select id="login" parameterType="memberDto" resultType="memberDto">
+		select userid, username, email
+		from member
+		where userid = #{userid} and userpw = #{userpw}
+	</select>
+	
+	<select id="detailMember" parameterType="string" resultType="memberDto">
+		select * 
+		from member
+		where userid=#{userid}
+	</select>
+	
+	<update id="updatePw" parameterType="memberDto">
+		update member set userpw = #{userpw}
+		where userid = #{userid}
+	</update>
+	
+</mapper>
